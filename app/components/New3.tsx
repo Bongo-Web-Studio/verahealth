@@ -1,39 +1,63 @@
 "use client";
+
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperClass } from "swiper"; // <-- type import
+import type { Swiper as SwiperClass } from "swiper"; // type import only
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
-// SAMPLE data (same as yours)
 const SAMPLE = [
   {
     id: "1",
-    eyebrow: "SHOP",
-    title: "Shop with a Specialist over video.",
-    subtitle: "Choose your next device in a guided, one-way video session.",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-iphone-17-pro-202509?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=UzBXQnlhUWdraTNvNU1Kb3pEQlpXQjVOVStZaG1ncWFjNXVUZkZ4anVIYlNab1lJcUZwSFVRK1htYlNmZUtPTG54cStVNU5BQmhzbkxYRGxDWUc3R2RBR0JWVHBRN0NKVm11SFZzeU45T2VCTXFJbjVIbEFUN05pTHFFYldZYzg",
+
+    title: "MD, Endocrinology",
+    subtitle:
+      "Does semaglutide lower major cardiovascular events in T2D patients without established ASCVD?",
   },
   {
     id: "2",
-    eyebrow: "APPLE SPECIALIST",
-    title: "Shop one on one with a Specialist online.",
-    subtitle: "",
-    img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&w=800",
+
+    title: "DO, Family Medicine",
+    subtitle:
+      "Which adult vaccines are recommended for a patient with COPD who smokes?",
   },
   {
     id: "3",
-    eyebrow: "TODAY AT APPLE",
-    title: "Explore Apple Intelligence",
-    subtitle: "Come and try it for yourself in a free session at the Apple Store.",
-    img: "https://images.unsplash.com/photo-1525373697403-2f517f7f6d96?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&w=1200",
+
+    title: "MD, Oncology",
+    subtitle:
+      "What baseline labs are needed before starting pembrolizumab for metastatic NSCLC?",
+  },
+  {
+    id: "4",
+
+    title: "MD, Emergency Medicine",
+    subtitle:
+      "Is there any reason not to start combination therapy in stage 2 hypertension?",
+  },
+  {
+    id: "5",
+
+    title: "MD, Gastro",
+    subtitle:
+      "In a patient with chronic diarrhea (> 4 wks) and no alarm features, what initial diagnostic work-up is recommended?",
+  },
+  {
+    id: "6",
+
+    title: "MD, Internal Medicine",
+    subtitle:
+      "In a patient with type 2 diabetes and BP 145/92 on lisinopril 20 mg, should I add a thiazide or a CCB?",
   },
 ];
 
-export default function AppleStyleSwiper({ items = SAMPLE }: { items?: typeof SAMPLE }) {
-  // <- IMPORTANT: give the ref the Swiper instance type
+export default function AppleStyleSwiper({
+  items = SAMPLE,
+}: {
+  items?: typeof SAMPLE;
+}) {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -41,22 +65,37 @@ export default function AppleStyleSwiper({ items = SAMPLE }: { items?: typeof SA
   const goNext = () => swiperRef.current?.slideNext();
 
   return (
-    <section className="bg-gray-50 py-10 px-6 sm:px-10 lg:px-20">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="flex items-start justify-between mb-8">
+    <section className="bg-white py-10 px-6 sm:px-10 lg:px-20">
+      <div className="mx-auto">
+        <div className="flex items-start justify-between ">
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-              <span className="text-black">Help is here.</span>{" "}
-              <span className="font-semibold text-gray-600">Whenever and however you need it.</span>
+            <h2 className="text-3xl  font-semibold mb-7 ">
+              <span className="text-neutral-800">What your peers are asking</span>{" "}
             </h2>
+          </div>
+
+          {/* Navigation buttons */}
+          <div className="hidden sm:flex gap-4">
+            <button
+              onClick={goPrev}
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-300 transition text-neutral-600"
+            >
+              <FiArrowLeft size={20} />
+            </button>
+            <button
+              onClick={goNext}
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-300 transition text-neutral-600"
+            >
+              <FiArrowRight size={20} />
+            </button>
           </div>
         </div>
 
         <div className="relative">
           <Swiper
             modules={[Navigation]}
-            onSwiper={(sw: SwiperClass) => (swiperRef.current = sw)}      // typed
-            onSlideChange={(sw: SwiperClass) => setActiveIndex(sw.activeIndex)} // typed
+            onSwiper={(sw: SwiperClass) => (swiperRef.current = sw)}
+            onSlideChange={(sw: SwiperClass) => setActiveIndex(sw.activeIndex)}
             slidesPerView={"auto"}
             spaceBetween={28}
             centeredSlides={false}
@@ -64,45 +103,34 @@ export default function AppleStyleSwiper({ items = SAMPLE }: { items?: typeof SA
           >
             {items.map((it, idx) => (
               <SwiperSlide
-                key={it.id}
-                className={`!w-[30rem] sm:!w-[34rem] lg:!w-[36rem] flex justify-center`}
+                key={`slide-${it.id}-${idx}`} // ✅ unique key
+                className="w-[30vw]! bg-gray-100 flex justify-center items-center h-[30vh]! rounded-2xl overflow-hidden"
               >
                 <article
-                  className={`relative bg-white rounded-2xl shadow-[0_6px_20px_rgba(15,23,42,0.06)] border border-transparent overflow-hidden transform transition-all duration-500 ease-out
-                  ${activeIndex === idx ? "scale-100 shadow-lg" : "scale-95 opacity-90"}`}
+                  className={`relative rounded-2xl  border border-transparent overflow-hidden transform transition-all duration-500 ease-out h-full
+                `}
                 >
-                  <div className="p-8 sm:p-10 lg:p-12 min-h-[22rem] flex flex-col">
-                    {it.eyebrow && (
-                      <div className="text-xs tracking-wide uppercase text-gray-500 mb-3">
-                        {it.eyebrow}
-                      </div>
-                    )}
-
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900 max-w-[18ch] leading-tight">
-                      {it.title}
+                  <div className="p-8 h-full">
+                    <h3 className="text-2xl font-semibold text-gray-900   h-[80%] ">
+                      {it.subtitle}
                     </h3>
 
-                    {it.subtitle && (
-                      <p className="text-sm text-gray-600 mt-4 max-w-[34ch]">{it.subtitle}</p>
-                    )}
+                    <p className="text-lg text-[#99A1AF] mt-4 h-[20%] flex justify-between items-center">
+                      <div>{it.title}</div>
+
+                      <div className="text-[#004BF6] border-[#004BF6] hover:bg-[#004BF6] hover:text-white border  rounded-full px-3 py-1 cursor-pointer">
+                        Ask to vera
+                      </div>
+                    </p>
 
                     <div className="flex-1" />
 
-                    <div className="relative flex items-end justify-center -mb-6 pointer-events-none">
-                      <img
-                        src={it.img}
-                        alt={it.title}
-                        className={`object-contain max-h-[12rem] sm:max-h-[14rem] lg:max-h-[16rem] transition-transform duration-500`}
-                      />
-                    </div>
+                    <div className="relative flex items-end justify-center -mb-6 pointer-events-none"></div>
                   </div>
                 </article>
               </SwiperSlide>
             ))}
           </Swiper>
-
-          {/* Desktop nav */}
-       
         </div>
       </div>
     </section>

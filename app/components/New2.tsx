@@ -21,7 +21,7 @@ const YC_BASE64 =
 
 export default function AsideHero() {
   return (
-    <section className="min-h-[70vh] flex flex-col  text-black ">
+    <section className="min-h-[70vh] flex flex-col  text-black  border-b border-gray-200">
       {/* Top small backed-by area */}
       <header className="w-full flex justify-center mt-12">
         <div className="flex items-center gap-3 select-none">
@@ -33,14 +33,22 @@ export default function AsideHero() {
 
       {/* Main centered content */}
       <div className="flex-1 flex items-center mt-10">
-        <div className="w-full max-w-4xl mx-auto px-6 text-center">
+        <div className="w-full max-w-3xl mx-auto  text-center ">
           <h1 className="mx-auto leading-snug text-4xl   text-black font-semibold">
-            Designed for tech sales teams. Aside fills the
-            <br /> knowledge gap during the sales call by surfacing
-            <br /> suggestions from your docs and your top <span className="text-gray-500">reps' past</span> calls.
+            Designed for doctors and medical professionals.
+            <br />
+            Our AI assistant fills knowledge gaps during Research by summarizing
+            evidence,
+            <br /> 
+            <span className="text-[#99A1AF]">Generating protocol drafts.</span>
           </h1>
 
-          <p className="mt-28 text-[22px] md:text-[26px] font-semibold text-black  ">No more <span className="italic font-serif font-normal ">“let me get back to you”.</span></p>
+          <p className="mt-28 text-[22px] md:text-[30px] font-semibold text-black  ">
+            No more{" "}
+            <span style={{fontFamily:"InstrumentSerif"}} className="italic font-serif font-normal  text-[#004BF6]">
+              “ suffering to find research assistant”.
+            </span>
+          </p>
         </div>
       </div>
 

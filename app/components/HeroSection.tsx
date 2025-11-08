@@ -26,7 +26,7 @@ export default function HeroSection() {
     >
       {/* NAV */}
       <div className=" flex items-center justify-between ">
-        <div className="flex items-center w-[40%]">
+        <div className="flex items-center w-[40%] pl-7">
           {/* simple brand mark */}
           <img
             className="w-14 h-14 "
