@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 
 /**
  * HeroSection (Typing-style Animation + Liquid-fill CTA)
@@ -10,53 +10,56 @@ import { motion, useAnimation } from "framer-motion";
  * - CTA has a left-to-right liquid fill animation on hover
  */
 export default function HeroSection() {
-  // Variants
-  const headingVariant = {
+  // A good typed bezier easing to replace string easings
+  const easeOutCubic: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+  // Variants (typed)
+  const headingVariant: Variants = {
     hidden: { opacity: 0, scale: 0.95, filter: "blur(10px)" },
     visible: {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: { duration: 1, ease: "easeOut" },
+      transition: { duration: 1, ease: easeOutCubic },
     },
   };
 
-  const wordVariant = {
+  const wordVariant: Variants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.08, duration: 0.4 },
+      transition: { delay: i * 0.08, duration: 0.4, ease: easeOutCubic },
     }),
   };
 
-  const descriptionVariant = {
+  const descriptionVariant: Variants = {
     hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.6, ease: "easeOut", delay: 1.2 },
+      transition: { duration: 0.6, ease: easeOutCubic, delay: 1.2 },
     },
   };
 
-  const buttonVariant = {
+  const buttonVariant: Variants = {
     hidden: { opacity: 0, scale: 0.9, y: 10 },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay: 1.8 },
+      transition: { duration: 0.6, ease: easeOutCubic, delay: 1.8 },
     },
   };
 
-  const screenshotVariant = {
+  const screenshotVariant: Variants = {
     hidden: { opacity: 0, scale: 0.98, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      transition: { duration: 0.8, ease: "easeOut", delay: 2.0 },
+      transition: { duration: 0.8, ease: easeOutCubic, delay: 2.0 },
     },
   };
 
@@ -67,10 +70,10 @@ export default function HeroSection() {
   const fillControls = useAnimation();
 
   const onHoverStart = () => {
-    fillControls.start({ width: "100%", transition: { duration: 0.45, ease: "easeOut" } });
+    fillControls.start({ width: "100%", transition: { duration: 0.45, ease: easeOutCubic } });
   };
   const onHoverEnd = () => {
-    fillControls.start({ width: "0%", transition: { duration: 0.45, ease: "easeOut" } });
+    fillControls.start({ width: "0%", transition: { duration: 0.45, ease: easeOutCubic } });
   };
 
   return (
@@ -164,7 +167,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 2.4 }}
+            transition={{ duration: 0.8, ease: easeOutCubic, delay: 2.4 }}
             className="absolute inset-0 flex items-center justify-center"
           >
             <div className=" w-[92vw] lg:w-[55vw] h-[22vh] lg:h-[40vh] bg-white rounded-xl shadow-2xl" />
