@@ -1,100 +1,176 @@
+"use client";
+
 import React from "react";
-import Image from "next/image";
+import { motion, useAnimation } from "framer-motion";
 
 /**
- * HeroSection
- * Pixel-focused recreation of the "Aside" landing hero (Next.js + TailwindCSS)
- *
- * Usage:
- * 1. Copy the hero screenshot to `public/images/hero-screenshot.png`.
- * 2. Drop this component in `components/HeroSection.jsx` and import it in a page.
- * 3. Make sure Tailwind is configured (see notes below for backdrop blur support).
- *
+ * HeroSection (Typing-style Animation + Liquid-fill CTA)
+ * - Headline animates word by word with blur + scale reveal
+ * - Paragraph fades upward with blur
+ * - CTA has a left-to-right liquid fill animation on hover
  */
 export default function HeroSection() {
+  // Variants
+  const headingVariant = {
+    hidden: { opacity: 0, scale: 0.95, filter: "blur(10px)" },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: { duration: 1, ease: "easeOut" },
+    },
+  };
+
+  const wordVariant = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.08, duration: 0.4 },
+    }),
+  };
+
+  const descriptionVariant = {
+    hidden: { opacity: 0, y: 40, filter: "blur(6px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: "easeOut", delay: 1.2 },
+    },
+  };
+
+  const buttonVariant = {
+    hidden: { opacity: 0, scale: 0.9, y: 10 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut", delay: 1.8 },
+    },
+  };
+
+  const screenshotVariant = {
+    hidden: { opacity: 0, scale: 0.98, filter: "blur(8px)" },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: { duration: 0.8, ease: "easeOut", delay: 2.0 },
+    },
+  };
+
+  const headingText = "Find the answer Practice with confidence";
+  const words = headingText.split(" ");
+
+  // CTA liquid fill control
+  const fillControls = useAnimation();
+
+  const onHoverStart = () => {
+    fillControls.start({ width: "100%", transition: { duration: 0.45, ease: "easeOut" } });
+  };
+  const onHoverEnd = () => {
+    fillControls.start({ width: "0%", transition: { duration: 0.45, ease: "easeOut" } });
+  };
+
   return (
-    <header
-      style={
-        {
-          // backgroundImage: "url('/bg1.png')",
-          // backgroundSize: "cover",
-          // backgroundPosition: "center",
-          // backgroundRepeat: "no-repeat",
-        }
-      }
-      className=" text-black  "
-    >
-      {/* NAV */}
-      <div className=" flex items-center justify-between ">
-        <div className="flex items-center w-[40%] pl-7">
-          {/* simple brand mark */}
-          <img
-            className="w-14 h-14 "
-            src="https://pbs.twimg.com/profile_images/1821084684736233472/sF41xOfD_400x400.jpg"
-            alt=""
-          />
-          <span className="font-semibold text-2xl">Vera Health</span>
-        </div>
-
-        {/* center nav (kept minimal so layout matches) */}
-        <nav className="hidden md:flex gap-8 items-center text-gray-300  w-[60%]  ">
-          <a className="px-8 py-2 rounded-full bg-[#004BF6] text-white">
-            Signup
-          </a>
-          <a className=" text-gray-500">Pricing</a>
-          <a className=" text-gray-500">Discover</a>
-
-          <a className="px-8 py-2 rounded-full bg-gray-200 text-gray-500">
-            Login
-          </a>
-        </nav>
-      </div>
-
-      {/* HERO */}
-      <div className=" flex w-full   justify-center items-center">
-        <div className=" flex w-full border  border-gray-200 ">
-          <div className="w-[60%]  p-10 border-r  border-gray-200 ">
-            <h1
+    <header className="text-black w-full">
+      <div className="flex w-full justify-center items-center">
+        <div className="flex flex-col lg:flex-row  w-full border border-gray-200">
+          {/* LEFT: Headline */}
+          <div className=" w-full lg:w-[60%] p-10 border-r border-gray-200">
+            <motion.h1
               style={{ fontFamily: "InstrumentSerif" }}
-              className="text-7xl  max-w-3xl  leading-tight text-start  "
+              className=" text-[36px] lg:text-7xl  lg:max-w-3xl leading-tight text-start"
+              variants={headingVariant}
+              initial="hidden"
+              animate="visible"
             >
-              Find the answer Practice with confidence
-            </h1>
+              {words.map((word, i) => (
+                <motion.span
+                  key={i}
+                  variants={wordVariant}
+                  initial="hidden"
+                  animate="visible"
+                  custom={i}
+                  className="inline-block mr-2"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
           </div>
 
-          <div className="w-[40%]  px-20 py-5">
-            <p className="mt-6 text-black max-w-2xl mx-auto text-start text-2xl ">
-              Improve patient outcomes with practical answers backed by 60M+
-              peer-reviewed and up-to-date papers and guidelines.{" "}
-              <span className="text-gray-400">
-                Delivered at the speed of AI.
-              </span>
-            </p>
+          {/* RIGHT: Description + CTA */}
+          <div className="lg:w-[40%] lg:px-20 lg:py-5 px-10 flex flex-col justify-center border-t border-gray-200">
+            <motion.p
+              variants={descriptionVariant}
+              initial="hidden"
+              animate="visible"
+              className="mt-6 text-black max-w-2xl text-start text-lg lg:text-2xl "
+            >
+              Improve patient outcomes with practical answers backed by{" "}
+              <span className="">60M+ peer-reviewed</span> and up-to-date papers and guidelines.{" "}
+              <span className="text-gray-400">Delivered at the speed of AI.</span>
+            </motion.p>
 
-            <div className="w-[15vw] mt-5 hover:bg-[#004BF6] hover:text-white px-2 py-5 text-2xl text-[#004BF6] rounded-full border border-[#004BF6] flex justify-center items-center">
-              Let's Talk To Vera
-            </div>
+            {/* CTA */}
+            <motion.div
+              variants={buttonVariant}
+              initial="hidden"
+              animate="visible"
+              className="relative mt-8 lg:w-[15vw] min-w-[220px]"
+            >
+              <motion.button
+                onHoverStart={onHoverStart}
+                onHoverEnd={onHoverEnd}
+                whileTap={{ scale: 0.97 }}
+                className="relative z-20 w-full  lg:px-6 py-4 text-xl lg:text-2xl mb-2 font-medium  text-white bg-[#004BF6] lg:bg-white lg:text-[#004BF6] border border-[#004BF6] rounded-full overflow-hidden flex justify-center items-center cursor-pointer hover:text-white"
+              >
+                {/* Text */}
+                <span className="relative z-20">Let's Talk To Vera</span>
+
+                {/* Liquid fill background */}
+                <motion.div
+                  initial={{ width: "0%" }}
+                  animate={fillControls}
+                  className="absolute left-0 top-0 h-full rounded-full"
+                  style={{ backgroundColor: "#004BF6", zIndex: 10 }}
+                />
+              </motion.button>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Mock mac window / screenshot with centered pill controls */}
-      <div className=" mt-10   ">
-        <div className="relative rounded-md overflow-hidden  flex  justify-center items-center w-full ">
-          {/* background screenshot: put the screenshot file at public/images/hero-screenshot.png */}
-          <div className="h-72 md:h-[58vh] w-[95vw] object-contain rounded-4xl overflow-hidden">
-            <div
-              className="w-full h-full "
-              style={{ backgroundImage: `url('./bg3.png')` }}
-            />
-          </div>
+      {/* SCREENSHOT / MOCK WINDOW */}
+      <motion.div
+        variants={screenshotVariant}
+        initial="hidden"
+        animate="visible"
+        className="mt-10 flex justify-center"
+      >
+        <div className="relative w-[98vw] lg:w-[95vw] h-[32vh] lg:h-[58vh] rounded-3xl overflow-hidden shadow-lg">
+          <div
+            className="w-full h-full"
+            style={{
+              backgroundImage: "url('./bg3.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
 
-          {/* floating pill (center) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-[55vw] bg-white h-[40vh] rounded-xl"></div>
-          </div>
+          {/* Floating pill window */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 2.4 }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <div className=" w-[92vw] lg:w-[55vw] h-[22vh] lg:h-[40vh] bg-white rounded-xl shadow-2xl" />
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </header>
   );
 }

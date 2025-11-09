@@ -38,18 +38,18 @@ export default function New5() {
     <section
       style={{
         backgroundImage:
-          "url('https://framerusercontent.com/images/EgzPzuHhMrO3uXSAQcQL9HjQxS4.jpg?scale-down-to=2048&width=2400&height=1280')",
+          "url('https://framerusercontent.com/images/EgzPzuHhMrO3uXSAQcQL9HjQxS4.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      className="w-full text-white py-20 px-8 overflow-hidden rounded-4xl"
+      className="w-full flex justify-center items-center text-white lg:py-20 lg:px-8 p-5 overflow-hidden rounded-4xl"
     >
       <div className="">
         <div className="flex flex-col">
           {/* Left heading */}
           <div className="mb-10 w-full flex justify-center items-center">
-            <h2 className="text-7xl">What People Saying About Vera AI</h2>
+            <h2 className=" text-xl lg:text-7xl">What People Saying About Vera AI</h2>
           </div>
 
           {/* Marquee (right-to-left) */}
@@ -64,7 +64,7 @@ export default function New5() {
                   {testimonials.map((t, i) => (
                     <article
                       key={i}
-                      className="marquee-item w-[600px] h-[53vh] bg-[#E5EFF8] text-black rounded-lg border border-white/10 p-9 backdrop-blur-sm"
+                      className="marquee-item w-[400px] lg:w-[600px] h-[30vh] lg:h-[53vh] bg-[#E5EFF8] text-black rounded-lg border border-white/10 p-9 backdrop-blur-sm"
                     >
                       <div className="flex flex-col justify-center items-start gap-4 h-[30%]">
                         {/* quote icon */}
@@ -103,28 +103,28 @@ export default function New5() {
                   {testimonials.map((t, i) => (
                     <article
                       key={`dup-${i}`}
-                      className="marquee-item w-[600px] h-[53vh] bg-[#E5EFF8] text-black rounded-lg border border-white/10 p-9 backdrop-blur-sm"
+                      className="marquee-item w-[400px] lg:w-[600px] h-[35vh] lg:h-[53vh] bg-[#E5EFF8] text-black rounded-lg border border-white/10 p-9 backdrop-blur-sm"
                     >
                       <div className="flex flex-col justify-center items-start gap-4 h-[30%]">
                         <div className="flex gap-2">
-                          <h1 className="bg-[#004BF6] h-4 w-4 rounded-full"></h1>{" "}
-                          <h1 className="bg-[#004BF6] h-4 w-4 rounded-full"></h1>
+                          <h1 className="bg-[#004BF6] h-2 w-2 lg:h-4 lg:w-4 rounded-full"></h1>{" "}
+                          <h1 className="bg-[#004BF6]  h-2 w-2 lg:h-4 lg:w-4 rounded-full"></h1>
                         </div>
-                        <h3 className="text-3xl">{t.quote}</h3>
+                        <h3 className=" text-xl lg:text-3xl">{t.quote}</h3>
                       </div>
 
-                      <p className="text-md text-neutral-800 font-semibold h-[50%] flex justify-center items-center">
+                      <p className="text-sm  lg:text-lg text-neutral-800 font-semibold h-[50%] flex justify-center items-center">
                         {t.body}
                       </p>
 
                       <div className="pt-4 border-t border-slate-200/30 flex items-center justify-between h-[20%]">
                         <div className="flex items-center gap-3">
-                          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-white font-medium"></div>
+                          <div className=" w-10 h-10 lg:w-16 lg:h-16 rounded-full bg-white flex items-center justify-center text-white font-medium"></div>
                           <div>
-                            <div className="text-xl font-medium text-black">
+                            <div className="text-sm  lg:text-lg  font-medium text-black">
                               {t.name}
                             </div>
-                            <div className="text-xl text-slate-400">
+                            <div className="text-sm lg:text-lg   text-slate-400">
                               {t.role}
                             </div>
                           </div>

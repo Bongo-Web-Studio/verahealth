@@ -53,7 +53,7 @@ export default function New8({ items = SAMPLE }: { items?: typeof SAMPLE }) {
       <div className="mx-auto">
         <div className="flex items-start justify-between">
           <div>
-            <h2 className="text-3xl  font-semibold mb-7">
+            <h2 className=" text-2xl lg:text-3xl  font-semibold mb-7">
               <span className="text-neutral-800">Features Of Vera AI</span>{" "}
             </h2>
           </div>

@@ -22,11 +22,11 @@ export default function New7({
   const iframeSrc = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&controls=1`;
 
   return (
-    <div className="min-h-screen bg-white text-black flex items-start justify-center py-12 px-4">
+    <div className=" bg-white text-black flex items-start justify-center py-12 px-4">
       <div className="w-full max-w-5xl">
         {/* Header */}
         <header className="text-center mb-8">
-          <h1 className="text-6xl  font-semibold leading-tight">
+          <h1 className=" text-4xl lg:text-6xl  font-semibold leading-tight">
             How To{" "}
             <em
               style={{ fontFamily: "InstrumentSerif, Georgia, serif" }}
