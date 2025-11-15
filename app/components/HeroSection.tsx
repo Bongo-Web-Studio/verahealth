@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
+import SearchComponent from "./SearchComponent";
 
 /**
  * HeroSection (Typing-style Animation + Liquid-fill CTA)
@@ -70,10 +71,16 @@ export default function HeroSection() {
   const fillControls = useAnimation();
 
   const onHoverStart = () => {
-    fillControls.start({ width: "100%", transition: { duration: 0.45, ease: easeOutCubic } });
+    fillControls.start({
+      width: "100%",
+      transition: { duration: 0.45, ease: easeOutCubic },
+    });
   };
   const onHoverEnd = () => {
-    fillControls.start({ width: "0%", transition: { duration: 0.45, ease: easeOutCubic } });
+    fillControls.start({
+      width: "0%",
+      transition: { duration: 0.45, ease: easeOutCubic },
+    });
   };
 
   return (
@@ -113,8 +120,11 @@ export default function HeroSection() {
               className="mt-6 text-black max-w-2xl text-start text-lg lg:text-2xl "
             >
               Improve patient outcomes with practical answers backed by{" "}
-              <span className="">60M+ peer-reviewed</span> and up-to-date papers and guidelines.{" "}
-              <span className="text-gray-400">Delivered at the speed of AI.</span>
+              <span className="">60M+ peer-reviewed</span> and up-to-date papers
+              and guidelines.{" "}
+              <span className="text-gray-400">
+                Delivered at the speed of AI.
+              </span>
             </motion.p>
 
             {/* CTA */}
@@ -155,11 +165,11 @@ export default function HeroSection() {
       >
         <div className="relative w-[98vw] lg:w-[95vw] h-[32vh] lg:h-[58vh] rounded-3xl overflow-hidden shadow-lg">
           <div
-            className="w-full h-full"
+            className="w-full h-full bg-cover bg-top bg-no-repeat  "
             style={{
               backgroundImage: "url('./bg3.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundSize: "",
+              backgroundPosition: "top",
             }}
           />
 
@@ -170,8 +180,25 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: easeOutCubic, delay: 2.4 }}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <div className=" w-[92vw] lg:w-[55vw] h-[22vh] lg:h-[40vh] bg-white rounded-xl shadow-2xl" />
+            {/* component */}
+            <SearchComponent />
           </motion.div>
+
+          <div className="hidden lg:block absolute bottom-4 left-1/2 transform -translate-x-1/2  items-center justify-center text-sm lg:text-base font-medium rounded-full shadow-md px-4 lg:px-6">
+            <h1
+              style={{ fontFamily: "InstrumentSerif" }}
+              className="italic font-serif font-normal text-white text-2xl"
+            >
+              Trusted by medical professionals all across the United States
+            </h1>
+
+            <div className="ml-4 flex items-center justify-center gap-5 ">
+              <img className="w-10 h-10" src="./logo1.png" alt="" />
+              <img className="w-10 h-10" src="./logo2.png" alt="" />
+
+              <img className="w-10 h-10" src="./logo3.png" alt="" />
+            </div>
+          </div>
         </div>
       </motion.div>
     </header>

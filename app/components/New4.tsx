@@ -11,7 +11,7 @@ const PEOPLE = [
     name: "Scott M. Silvers, MD",
     title:
       "Prev. Chair, Emergency Medicine, Mayo Clinic\nPrev. CMO, Knowledge Management, Optum Health",
-    img: "https://framerusercontent.com/images/Wrcp1dnwZGkTnhvozgbB5KmcqSg.jpg?scale-down-to=1024&width=4096&height=2304",
+    img: "./p3.jpg",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const PEOPLE = [
     name: "Bernard P. Chang, MD, PhD",
     title:
       "Associate Dean, Columbia University\nVice Chair, Emergency Medicine, NewYork-Presbyterian",
-    img: "https://framerusercontent.com/images/9K0EiDtpbYkfTAdWvOqeE75L9T8.jpg?scale-down-to=1024&width=4033&height=2269",
+    img: "./p4.png",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const PEOPLE = [
     name: "Christopher W. Baugh, MD, MBA",
     title:
       "Prev. Vice Chair, Emergency Medicine, Brigham and Women's Hospital\nAssociate Professor, Harvard Medical School",
-    img: "https://framerusercontent.com/images/hLDdDwttJoxo2gYVLPgJScDnsQ.jpeg?scale-down-to=1024&width=1600&height=900",
+    img: "./p1.png",
   },
 ];
 
@@ -115,10 +115,10 @@ export default function RealTimeTranscription() {
                 className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
                 aria-hidden={false}
               >
-                <h3 id={`person-${p.id}-name`} className="text-white text-4xl font-semibold leading-snug">
+                <h3 id={`person-${p.id}-name`} className="text-white  text-2xl lg:text-3xl font-semibold leading-snug">
                   {p.name}
                 </h3>
-                <p className="text-2xl text-gray-300 whitespace-pre-line mt-2">{p.title}</p>
+                <p className="text-lg lg:text-xl text-gray-300 whitespace-pre-line mt-2">{p.title}</p>
               </div>
             </article>
           ))}
