@@ -112,7 +112,7 @@ export default function RealTimeTranscription() {
               <div className="absolute inset-0 pointer-events-none rounded-xl ring-1 ring-black/5" />
 
               <div
-                className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+                className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
                 aria-hidden={false}
               >
                 <h3 id={`person-${p.id}-name`} className="text-white  text-2xl lg:text-3xl font-semibold leading-snug">
